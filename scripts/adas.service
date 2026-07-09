@@ -1,0 +1,33 @@
+[Unit]
+Description=ADAS — Sistema de Deteccao e Alerta de Seguranca
+After=multi-user.target bluetooth.target
+Wants=bluetooth.target
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/adas_project
+
+# Aguarda o Bluetooth estabilizar e cria a porta RFCOMM
+ExecStartPre=/bin/sleep 5
+ExecStartPre=/usr/bin/rfcomm bind /dev/rfcomm0 00:10:CC:4F:36:03
+
+# Inicia o sistema ADAS
+ExecStart=/home/pi/tflite_env/bin/python /home/pi/adas_project/main.py
+
+# Libera a porta RFCOMM ao encerrar
+ExecStopPost=/usr/bin/rfcomm release /dev/rfcomm0
+
+Restart=on-failure
+RestartSec=5s
+StartLimitIntervalSec=60
+StartLimitBurst=5
+StandardOutput=journal
+StandardError=journal
+
+Environment=ADAS_CONFIG=/home/pi/adas_project/config/settings.yaml
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,7 @@
+numpy==1.24.2
+picamera2==0.3.31
+PyYAML==6.0.3
+RPi.GPIO==0.7.1
+rpi_lgpio==0.6
+obd==0.7.3
+tflite_runtime==2.14.0

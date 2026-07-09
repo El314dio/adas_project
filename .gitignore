@@ -1,0 +1,21 @@
+
+# Logs
+logs/
+*.log
+
+# Calibração — vídeos e dados brutos
+calibracao/videos/
+calibracao/dados/*.csv
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+tflite_env/
+
+# Imagens de preview
+*.png
+*.jpg
+*.jpeg
+*.avi

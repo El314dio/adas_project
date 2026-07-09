@@ -1,0 +1,57 @@
+model:
+  path: /home/pi/adas_project/models/mobilenet_ssd/detect.tflite
+  conf_threshold: 0.60
+  classes_alvo: [0, 1, 3]           # 0=Pedestre 1=Ciclista 3=Moto
+
+camera:
+  width: 240
+  height: 180
+  frame_skip: 2
+  fps_smoothing: 10
+
+filtro_bbox:
+  area_min: 0.03
+  aspecto_min: 1.5
+
+trapezio:
+  x_topo_esq: 0.34
+  x_topo_dir: 0.68
+  x_base_esq: 0.00
+  x_base_dir: 1.00
+  y_topo: 0.00
+  y_base: 1.00
+
+distancia:
+  altura_real_pedestre: 1.7
+  focal_length: 526.0
+
+velocidade:
+  vel_min_movimento: 2.0
+  vel_alerta_kmh: 3.0
+  vel_perigo_kmh: 10.0
+
+obd:
+  porta: /dev/rfcomm0
+  baudrate: null
+  timeout: 2.0
+  hz: 10.0
+
+gpio:
+  led_vermelho: 17
+  led_amarelo: 27
+  led_verde: 22
+  pino_buzzer: 18
+
+buzzer:
+  pulso_on: 0.20
+  pulso_off: 0.30
+
+logging:
+  intervalo: 5.0
+  nivel: INFO
+  arquivo: /var/log/adas/adas.log
+  max_bytes: 10485760     # 10 MB
+  backup_count: 5
+
+filtro:
+  frames_confirmacao: 3
